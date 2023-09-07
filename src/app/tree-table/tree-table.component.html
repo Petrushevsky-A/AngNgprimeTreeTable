@@ -1,0 +1,33 @@
+<div class="card">
+  <p-treeTable [value]="sales" [resizableColumns]="true" [autoLayout]="true"  [tableStyle]="{'min-width':'50rem'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th rowspan="3">Название СДР</th>
+        <th *ngFor="let head_year of unpack_name_year | keyvalue" [attr.colspan]="head_year.value">{{head_year.key}}</th>
+      </tr>
+      <tr *ngIf="unpack_name_month">
+        <th *ngFor="let head_month of unpack_name_month | keyvalue" [attr.colspan]="head_month.value">{{head_month.key}}</th>
+      </tr>
+      <tr *ngIf="unpack_name_day">
+        <th *ngFor="let head_day of unpack_name_day | keyvalue" [attr.colspan]="head_day.value">{{head_day.key}}</th>
+      </tr>
+      <tr>
+        <th *ngFor="let name_price of unpuck_name_price">{{name_price}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-rowIndex="rowIndex">
+      <tr>
+        <td>
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{ rowData.code_wbs }}.{{ rowData.name }}
+        </td>
+        <td *ngFor="let column_data of rowData.column_list_data ">{{column_data}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="3">ИТОГО</td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</div>
